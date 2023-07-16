@@ -1,31 +1,29 @@
-setwd('C:/Users/rubind1/Documents/Coursera-R')
-##
-## set the input x as a matrix
-## then set the solved value "s" as a null
-## then I changed every reference to "mean" to "solve"
-makeCacheMatrix <- function(x = matrix(sample(1:100,9),3,3)) {
-  s <- NULL
+# Assign a matrix to input variable 'x'
+# Set the initial value of 'solved' as null
+# Replace all occurrences of "mean" with "solve" throughout the code
+makeCacheMatrix <- function(x = matrix(sample(1:100, 9), 3, 3)) {
+  solved <- NULL
   set <- function(y) {
     x <<- y
-    s <<- NULL
+    solved <<- NULL
   }
   get <- function() x
-  setsolve <- function(solve) s <<- solve
-  getsolve <- function() s
+  setSolve <- function(solve) solved <<- solve
+  getSolve <- function() solved
   list(set = set, get = get,
-       setsolve = setsolve,
-       getsolve = getsolve)
+       setSolve = setSolve,
+       getSolve = getSolve)
 }
-##
-## Same here, changed "mean" to "solve" and "m" to "s"
+#
+# Similarly, replace "mean" with "solve" and "m" with "s"
 cacheSolve <- function(x, ...) {
-  s <- x$getsolve()
-  if(!is.null(s)) {
-    message("getting inversed matrix")
-    return(s)
+  solved <- x$getSolve()
+  if (!is.null(solved)) {
+    message("Getting the inverted matrix")
+    return(solved)
   }
   data <- x$get()
-  s <- solve(data, ...)
-  x$setsolve(s)
-  s
+  solved <- solve(data, ...)
+  x$setSolve(solved)
+  solved
 }
